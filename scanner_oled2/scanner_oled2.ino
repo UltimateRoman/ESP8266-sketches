@@ -24,20 +24,17 @@ void setup() {
   display.setRotation(2);
 
   for(int16_t i=0; i<display.height()/2; i+=2) {
-    display.clearDisplay();
     display.drawCircle(display.width()/2, display.height()/2, i, SSD1306_WHITE);
     display.display();
     delay(10);
+    display.clearDisplay();
   }
 
-  delay(500);
-
-  display.clearDisplay();
-
   display.setTextSize(2);
-  display.setCursor(0,0);
+  display.setCursor(0,10);
   display.setTextColor(SSD1306_WHITE);
-  display.println("Powered by");
+  display.print("Powered by");
+  display.setCursor(48,30);
   display.print("RK");
 
   display.display();
@@ -49,9 +46,10 @@ void loop() {
 
   display.clearDisplay();
   display.setTextSize(2);
-  display.setCursor(0,0);
+  display.setCursor(0,16);
   display.print("Found ");
   display.println(n);
+  display.setCursor(0,32);
   display.print("Network(s)");
   display.display();
   delay(1500);
@@ -68,8 +66,23 @@ void loop() {
     display.println(WiFi.RSSI(i));
     display.setCursor(0,32);
     display.print("Encryption: ");
-    display.println(WiFi.encryptionType(i));
-    display.setCursor(0,48);
+    String enc;
+    switch(WiFi.encryptionType(i)) {
+      case 2: enc="WPA/PSK";
+              break;
+      case 4: enc="WPA2/PSK";
+              break;
+      case 5: enc="WEP";
+              break;
+      case 7: enc="open :)";
+              break;
+      case 8: enc="WPA/WPA2/PSK";
+              break;
+              
+      default: enc="N/A";
+    }
+    display.println(enc);
+    display.setCursor(0,54);
     display.print("Channel: ");
     display.println(WiFi.channel(i));
     display.display();
