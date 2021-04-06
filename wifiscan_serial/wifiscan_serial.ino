@@ -21,5 +21,5 @@ void loop() {
     Serial.println(WiFi.encryptionType(i));
     delay(100);
   }
-  delay(10000);
+  delay(5000);
 }

@@ -21,8 +21,6 @@ void setup() {
   display.display();
   delay(3000);
 
-  display.setRotation(2);
-
   for(int16_t i=0; i<display.height()/2; i+=2) {
     display.drawCircle(display.width()/2, display.height()/2, i, SSD1306_WHITE);
     display.display();
@@ -87,7 +85,7 @@ void loop() {
     display.println(WiFi.channel(i));
     display.display();
     
-    delay(5000);
+    delay(3000);
   }
 
   display.clearDisplay();
@@ -96,5 +94,5 @@ void loop() {
   display.print("Scanning........");
   display.display();
   
-  delay(5000);
+  delay(2000);
 }
